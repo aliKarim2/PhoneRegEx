@@ -1,1 +1,6 @@
-dagagg
+# Code Flow
+- To check if a number is valid or not, start from the beginning of the string to end
+- Meaning, start from the area code down to the extension
+- For each section, after checking it, delete that part from the string
+- For example, after checking the area code, I would remove it from the string and keep checking the number with the modified string
+- At the very end, the size of the string should be 0
