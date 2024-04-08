@@ -1,57 +1,34 @@
 #include <iostream>
 #include <string>
 
-#define TEST_COMMENTS 1
+#define TEST_COMMENTS 0
 
 
-bool phoneCheck(std::string phoneNumber);
-bool areaCodeCheck(std::string areaCode, bool paranthesis);
-// bool exchangeCodeCheck(std::string exchangeCode);
-// bool additionalDigitCheck(std::string additionalDigits);
-// bool extensionCheck(std::string extnesion);
-bool digitCheck(std::string expression, int ct);
+bool phoneCheck(std::string phoneNumber); //larger function that returns if phone number is valid
+bool areaCodeCheck(std::string areaCode, bool paranthesis); //checks area code
+bool digitCheck(std::string expression, int ct);    //serves as exchange code, additional digits, and extension digits check
 
 int main(){
 
     std::string input;
-    std::string smaller;
-    // input = "reads";
-
     std::cout << "Enter a phone number to test:\n";
-    std::cin >> input;
+    std::getline(std::cin, input);  // Read input into a std::string object
 
-    // smaller = input.substr(3);
+    std::cout << (phoneCheck(input) ? "Valid Phone Number" : "Invalid Phone Number");
 
-    // std::cout << "Input: " << input << '\n';
-    // std::cout << "Smaller: " << smaller << '\n';
+    std::cout << '\n';
 
-    std::cout << (phoneCheck(input) ? "Good" : "Bad");
-
-
-    #if TEST_COMMENTS
-
-    #endif
-
-
-    std::cout << "\nProgram Terminated";
+    std::cout << "Program Terminated";
     return 0;
 }
 
 bool phoneCheck(std::string phoneNumber){
     const bool PARENTHESIS = true;
     char seperator;
-    std::cout << "Inputted Number: " << phoneNumber << "\n";
-    // phoneNumber = phoneNumber.substr(5);
 
-
-
-    std::cin.ignore();
-    std::cin.get();
-
-
-    // std::cout << "\n\n\n";
-    // std::cout << phoneNumber << '\n';
-    // std::cin.get();
+    #if TEST_COMMENTS
+        std::cout << "Inputted Number: " << phoneNumber << "\n";
+    #endif
 
     //Check the area code
     {
@@ -105,18 +82,20 @@ bool phoneCheck(std::string phoneNumber){
             return false;
         } 
     }
-    //Now only need to focus on "focused input"
 
-
-    //check to see what the seperator symbol is
-    if(phoneNumber[0] == '.' || phoneNumber[0] == '-'){
-        #if TEST_COMMENTS
-        std::cout << "good first seperator\n";
-        #endif
-        seperator = phoneNumber[0];
-    } else {
-        return false;
+    //Determine seperator
+    {
+        //check to see what the seperator symbol is
+        if(phoneNumber[0] == '.' || phoneNumber[0] == '-'){
+            #if TEST_COMMENTS
+            std::cout << "good first seperator\n";
+            #endif
+            seperator = phoneNumber[0];
+        } else {
+            return false;
+        }
     }
+    
 
     //make the new phone number start from the exchange number
     phoneNumber = phoneNumber.substr(1);
@@ -142,7 +121,7 @@ bool phoneCheck(std::string phoneNumber){
     }
     #if TEST_COMMENTS
         std::cout << "good second seperator\n";
-        #endif
+    #endif
 
     //make phone number just start from the additional digits
     phoneNumber = phoneNumber.substr(1);
@@ -157,18 +136,19 @@ bool phoneCheck(std::string phoneNumber){
         #if TEST_COMMENTS
         std::cout << "good additional digits\n";
         #endif
+
+
         //remove the addition digits from string
         phoneNumber = phoneNumber.substr(4);
 
     }
 
-  
     //Check the extension
     {
         //NOTE: If there is no extension, the phone number size should be 0
         if(phoneNumber.size() == 0){
             #if TEST_COMMENTS
-            std::cout << "good, no extensionfound\n";
+            std::cout << "good, no extension found\n";
             #endif
             return true;
         }
@@ -180,6 +160,8 @@ bool phoneCheck(std::string phoneNumber){
             #endif
             phoneNumber = phoneNumber.substr(1);
         }
+
+    
 
         if(phoneNumber[0] == 'x' || phoneNumber[0] == 'X'){
             //there is an extension
@@ -214,8 +196,6 @@ bool phoneCheck(std::string phoneNumber){
 
     }
 
-    
-
     return true;
 }
 bool areaCodeCheck(std::string areaCode, bool paranthesis){
@@ -244,7 +224,6 @@ bool areaCodeCheck(std::string areaCode, bool paranthesis){
             }
         }
 
-        std::cout << "C1\n";
 
         if(areaCode[4] != ')'){
             return false;
@@ -278,35 +257,7 @@ bool areaCodeCheck(std::string areaCode, bool paranthesis){
 
     return false;
 }
-// bool exchangeCodeCheck(std::string exchangeCode){
-// 
-//     //checks for 3 numbers at start of a string
-//     //if there are not 3 consecutive numbers, fails
-//     for(int i = 0; i < 3; i++){
-//         if(!isdigit(exchangeCode[i])){
-//             return false;
-//         }
-//     }
-// 
-//     //return true if everything went well
-//     return true;
-// }
-// bool additionalDigitCheck(std::string additionalDigits){
-//     //checks for 4 numbers at start of a string
-//     //if there are not 4 consecutive numbers, fails
-//     for(int i = 0; i < 4; i++){
-//         if(!isdigit(additionalDigits[i])){
-//             return false;
-//         }
-//     }
-// 
-//     //return true if everything went well
-//     return true;
-// }
-// bool extensionCheck(std::string extnesion){
-// 
-//     return false;
-// }
+
 bool digitCheck(std::string expression, int ct){
     for(int i = 0; i < ct; i++){
         if(!isdigit(expression[i])){
