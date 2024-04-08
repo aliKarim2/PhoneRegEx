@@ -1,5 +1,5 @@
 # Information
-- Small project dedicated to making a phone number validation program.
+- Small project in C++ dedicated to making a phone number validation program.
 - A program like this would regularly use a regular expression, but this program will solve the problem without it
 - Specific requirements for the validation program are listed below
   
@@ -24,3 +24,6 @@
  # Remark
  - Yes, I know that this problem would take one line of code to complete using a reg ex (even though it would look atrocious)
  - This is just to show that a problem like this one can be solved without using a regular expression.
+--------
+- Started: 4/6/24
+- Finished 4/8/24
